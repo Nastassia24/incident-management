@@ -64,7 +64,19 @@
         "db": "hana",
         "auth": "xsuaa"
       },
-      "html5-runtime": true
+      "API_BUSINESS_PARTNER": {
+        "kind": "odata",
+        "model": "srv/external/API_BUSINESS_PARTNER",
+        "[production]": {
+          "credentials": {
+            "destination": "businessPartner",
+            "path": "odata/v2/api-business-partner"
+          }
+        }
+      },
+      "html5-runtime": true,
+      "destinations": true,
+      "workzone": true
     },
     "sql": {
       "native_hana_associations": false

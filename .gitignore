@@ -8,6 +8,7 @@ default-*.json
 gen/
 node_modules/
 target/
+app/incident/dist
 
 # Web IDE, App Studio
 .che/
@@ -32,3 +33,4 @@ mta_archives/
 
 # @cap-js/cds-typer
 @cds-models
+resources/incidents.zip
