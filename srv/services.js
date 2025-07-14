@@ -7,11 +7,33 @@ class ProcessorService extends cds.ApplicationService {
     this.before("CREATE", "Incidents", (req) => this.changeUrgencyDueToSubject(req.data));
     this.on('READ', 'Customers', (req) => this.onCustomerRead(req));
     this.on(['CREATE', 'UPDATE'], 'Incidents', (req, next) => this.onCustomerCache(req, next));
+    this.on("GetOrdersLocalDest", (req) => this.getOrdersLocalDest(req));
+    this.on("GetOrdersBtpDest", (req) => this.getOrdersBtpDest(req));
   
     this.S4bupa = await cds.connect.to('API_BUSINESS_PARTNER');
     this.remoteService = await cds.connect.to('RemoteService');
+    this.northwindLocal = await cds.connect.to('NORTHWIND_LOCAL_DEST');
+    this.northwindBtp = await cds.connect.to('NORTHWIND_BTP_DEST');
   
     return super.init();
+  }
+
+  async getOrdersLocalDest(req) {
+    try {
+      const orders = await this.northwindLocal.get("/Orders");
+      return orders;
+    } catch (err) {
+        console.log(err);
+    }
+  }
+
+  async getOrdersBtpDest(req) {
+    try {
+      const orders = await this.northwindBtp.get("/Orders");
+      return orders;
+    } catch (err) {
+        console.log(err);
+    }
   }
 
   changeUrgencyDueToSubject(data) {

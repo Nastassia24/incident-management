@@ -8,6 +8,8 @@ service ProcessorService {
 
     @readonly
     entity Customers as projection on my.Customers;
+    function GetOrdersLocalDest() returns array of String;
+    function GetOrdersBtpDest() returns array of String;
 }
 
 annotate ProcessorService.Incidents with @odata.draft.enabled; 
