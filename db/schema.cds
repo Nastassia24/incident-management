@@ -4,7 +4,7 @@ namespace sap.capire.incidents;
 /**
 * Incidents created by Customers.
 */
-entity Incidents : cuid, managed {  
+entity Incidents : cuid, managed {
 customer     : Association to Customers;
 title        : String  @title : 'Title';
 urgency        : Association to Urgency default 'M';
@@ -14,6 +14,12 @@ conversation  : Composition of many {
     timestamp : type of managed:createdAt;
     author    : type of managed:createdBy;
     message   : String;
+};
+comments     : Composition of many {
+    key ID    : UUID;
+    author    : type of managed:createdBy;
+    comment   : String;
+    createdAt : type of managed:createdAt;
 };
 }
 
@@ -61,3 +67,9 @@ key code: String enum {
 
 type EMailAddress : String;
 type PhoneNumber : String;
+
+view ListOfIncidents as select from Incidents {
+    key ID,
+    title,
+    customer
+};

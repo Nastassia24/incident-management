@@ -3,11 +3,14 @@ using { sap.capire.incidents as my } from '../db/schema';
 /**
  * Service used by support personell, i.e. the incidents' 'processors'.
  */
-service ProcessorService { 
+service ProcessorService {
     entity Incidents as projection on my.Incidents;
 
     @readonly
     entity Customers as projection on my.Customers;
+
+    @readonly
+    entity ListOfIncidents as projection on my.ListOfIncidents;
     function GetOrdersLocalDest() returns array of String;
     function GetOrdersBtpDest() returns array of String;
 }

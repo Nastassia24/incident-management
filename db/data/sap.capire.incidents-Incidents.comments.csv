@@ -1,0 +1,5 @@
+ID,up__ID,author,comment,createdAt
+c1000000-0000-0000-0000-000000000001,3b23bb4b-4ac7-4a24-ac02-aa10cabd842c,Alice,Checked the inverter — firmware update resolved the issue.,2024-01-10T09:00:00Z
+c1000000-0000-0000-0000-000000000002,3a4ede72-244a-4f5f-8efa-b17e032d01ee,Bob,Technician dispatched to inspect panel connections.,2024-01-11T10:30:00Z
+c1000000-0000-0000-0000-000000000003,3583f982-d7df-4aad-ab26-301d4a157cd7,Alice,Replacement panel ordered, ETA 3 business days.,2024-01-12T08:15:00Z
+c1000000-0000-0000-0000-000000000004,3ccf474c-3881-44b7-99fb-59a2a4668418,Bob,Noise traced to loose relay — repair scheduled.,2024-01-13T14:00:00Z
