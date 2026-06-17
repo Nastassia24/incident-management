@@ -13,6 +13,10 @@ service ProcessorService {
     entity ListOfIncidents as projection on my.ListOfIncidents;
     function GetOrdersLocalDest() returns array of String;
     function GetOrdersBtpDest() returns array of String;
+
+    entity Items as projection on my.Items;
+    function GetItemsByQuantity(quantity : Integer) returns array of Items;
+    action   CreateItem(title : String, descr : String, quantity : Integer) returns Items;
 }
 
 annotate ProcessorService.Incidents with @odata.draft.enabled; 

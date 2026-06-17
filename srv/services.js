@@ -9,6 +9,24 @@ class ProcessorService extends cds.ApplicationService {
     this.on(['CREATE', 'UPDATE'], 'Incidents', (req, next) => this.onCustomerCache(req, next));
     this.on("GetOrdersLocalDest", (req) => this.getOrdersLocalDest(req));
     this.on("GetOrdersBtpDest", (req) => this.getOrdersBtpDest(req));
+
+    this.on('GetItemsByQuantity', async (req) => {
+      const { Items } = this.entities;
+      const { quantity } = req.data;
+      return SELECT.from(Items).where({ quantity });
+    });
+
+    this.before('CreateItem', (req) => {
+      if (req.data.quantity > 100)
+        req.error(400, "Item quantity must not exceed 100");
+    });
+
+    this.on('CreateItem', async (req) => {
+      const { Items } = this.entities;
+      const { title, descr, quantity } = req.data;
+      await INSERT.into(Items).entries({ title, descr, quantity });
+      return SELECT.one.from(Items).orderBy('createdAt desc');
+    });
   
     this.S4bupa = await cds.connect.to('API_BUSINESS_PARTNER');
     this.remoteService = await cds.connect.to('RemoteService');
